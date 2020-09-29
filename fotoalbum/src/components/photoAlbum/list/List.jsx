@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ListItem from '../listItem/ListItem.jsx';
+import './List.css';
 
 export default class List extends Component {
   
@@ -29,7 +30,7 @@ export default class List extends Component {
 
   render() {
     return (
-      <ul>
+      <ul className="listOfItems">
           {this.state.albums.map(album => (
               generateListItem(album, this.state.users)
           ))}

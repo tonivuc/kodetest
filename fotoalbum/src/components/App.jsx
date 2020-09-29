@@ -5,7 +5,10 @@ import List from './photoAlbum/list/List.jsx';
 function App() {
   return (
     <div className="App">
-      <List></List>
+      <main>
+        <h1>List of albums</h1>
+        <List></List>
+      </main>
     </div>
   );
 }
