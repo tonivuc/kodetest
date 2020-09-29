@@ -11,7 +11,6 @@ export default class List extends Component {
       albums: [],
       users: []
     }
-    this.setState = this.setState.bind(this);
   }
 
   componentDidMount() {
