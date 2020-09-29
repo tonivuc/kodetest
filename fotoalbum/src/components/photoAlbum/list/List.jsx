@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ListItem from '../listItem/ListItem.jsx';
 import './List.css';
-import { checkFetchReponseStatus } from '../../../utils';
+import { fetchDataAsJson } from '../../../utils';
 
 export default class List extends Component {
   
@@ -14,24 +14,26 @@ export default class List extends Component {
   }
 
   componentDidMount() {
-    fetch('https://jsonplaceholder.typicode.com/albums')
-    .then(checkFetchReponseStatus)
-    .then(res => res.json())
+    this.fetchAlbums();
+    this.fetchUsers();
+  }
+
+  fetchUsers() {
+    fetchDataAsJson("https://jsonplaceholder.typicode.com/users").then((data) => {
+      this.setState({ users: data })
+    })
+    .catch((err) => {
+      this.setState({users: [{id: 0, name: "Unable to retrieve users. "+err}]})
+    });
+  }
+
+  fetchAlbums() {
+    fetchDataAsJson("https://jsonplaceholder.typicode.com/albums")
     .then((data) => {
       this.setState({ albums: data })
     })
     .catch((err) => {
-      this.setState({albums: [{userId:0, id: 0, title: "Unable to retrieve albums "+err}]})
-    });
-
-    fetch('https://jsonplaceholder.typicode.com/users')
-    .then(checkFetchReponseStatus)
-    .then(res => res.json())
-    .then((data) => {
-      this.setState({ users: data })
-    })
-    .catch((err) => {
-      this.setState({users: [{id: 0, name: "Unable to retrieve users "+err}]})
+      this.setState({albums: [{userId:0, id: 0, title: "Unable to retrieve albums. "+err}]})
     });
   }
 

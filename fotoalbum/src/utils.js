@@ -3,5 +3,11 @@ export function checkFetchReponseStatus(response) {
         throw Error(response.status+" "+response.statusText);
     }
     return response;
-  }
+}
+
+export function fetchDataAsJson(url) {
+    return fetch(url)
+    .then(checkFetchReponseStatus)
+    .then(res => res.json());
+}
   
