@@ -31,14 +31,18 @@ export default class List extends Component {
     return (
       <ul>
           {this.state.albums.map(album => (
-              someFunc(album, this.state.users)
+              generateListItem(album, this.state.users)
           ))}
       </ul>
     )
   }
 }
 
-function someFunc(album, users) {
-  var correctUser =  users.filter(user => user.id === album.userId);
-  return <ListItem key={album.id} title={album.title} userName={correctUser.name} email={correctUser.email}></ListItem>;
+function generateListItem(album, users) {
+  var correctUser =  users.filter(user => user.id === album.userId)[0];
+  if (correctUser == undefined) {
+    correctUser.name = "User unknown";
+    correctUser.email = "";
+  }
+  return <ListItem key={album.id} title={album.title} name={correctUser.name} email={correctUser.email}></ListItem>;
 }

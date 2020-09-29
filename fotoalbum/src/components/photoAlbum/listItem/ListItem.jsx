@@ -10,8 +10,8 @@ export default class ListItem extends Component {
   render() {
     return (
         <div className="addedEquipmentListElement">
-            <p>Album title</p>
-            <p>User Name and email</p>
+            <p>{this.props.title}</p>
+            <p>{this.props.name} and {this.props.email}</p>
         </div>
     )
   }
