@@ -40,14 +40,14 @@ export default class List extends Component {
     return (
       <ul className="listOfItems">
           {this.state.albums.map(album => (
-              generateListItem(album, this.state.users)
+              generatedListItem(album, this.state.users)
           ))}
       </ul>
     )
   }
 }
 
-function generateListItem(album, users) {
+function generatedListItem(album, users) {
   var correctUser =  users.find(user => user.id === album.userId);
   if (correctUser == undefined) {
     correctUser = {
