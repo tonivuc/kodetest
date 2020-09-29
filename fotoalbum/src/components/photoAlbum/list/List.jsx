@@ -41,8 +41,9 @@ export default class List extends Component {
 function generateListItem(album, users) {
   var correctUser =  users.filter(user => user.id === album.userId)[0];
   if (correctUser == undefined) {
-    correctUser.name = "User unknown";
-    correctUser.email = "";
+    correctUser = {
+      name: "User unknown", 
+      email: ""};
   }
   return <ListItem key={album.id} title={album.title} name={correctUser.name} email={correctUser.email}></ListItem>;
 }

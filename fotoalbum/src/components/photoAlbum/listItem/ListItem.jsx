@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Segment } from 'semantic-ui-react';
 //import './ListItem.css';
 
 export default class ListItem extends Component {
@@ -9,10 +10,10 @@ export default class ListItem extends Component {
 
   render() {
     return (
-        <div className="addedEquipmentListElement">
+        <Segment className="addedEquipmentListElement">
             <p>{this.props.title}</p>
             <p>{this.props.name} and {this.props.email}</p>
-        </div>
+        </Segment>
     )
   }
 }
