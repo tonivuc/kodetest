@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import ListItem from '../listItem/ListItem.jsx';
-import './List.css';
+import './AlbumList.css';
 import { fetchDataAsJson } from '../../../utils';
 
-export default class List extends Component {
+export default class AlbumList extends Component {
   
   constructor(props) {
     super(props);
