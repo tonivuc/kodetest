@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ListItem from '../listItem/ListItem.jsx';
 import './List.css';
+import { checkFetchReponseStatus } from '../../../utils';
 
 export default class List extends Component {
   
@@ -10,22 +11,29 @@ export default class List extends Component {
       albums: [],
       users: []
     }
+    this.setState = this.setState.bind(this);
   }
 
   componentDidMount() {
     fetch('https://jsonplaceholder.typicode.com/albums')
+    .then(checkFetchReponseStatus)
     .then(res => res.json())
     .then((data) => {
       this.setState({ albums: data })
     })
-    .catch(console.log)
+    .catch((err) => {
+      this.setState({albums: [{userId:0, id: 0, title: "Unable to retrieve albums "+err}]})
+    });
 
     fetch('https://jsonplaceholder.typicode.com/users')
+    .then(checkFetchReponseStatus)
     .then(res => res.json())
     .then((data) => {
       this.setState({ users: data })
     })
-    .catch(console.log)
+    .catch((err) => {
+      this.setState({users: [{id: 0, name: "Unable to retrieve users "+err}]})
+    });
   }
 
   render() {
@@ -40,7 +48,7 @@ export default class List extends Component {
 }
 
 function generateListItem(album, users) {
-  var correctUser =  users.filter(user => user.id === album.userId)[0];
+  var correctUser =  users.find(user => user.id === album.userId);
   if (correctUser == undefined) {
     correctUser = {
       name: "User unknown", 
