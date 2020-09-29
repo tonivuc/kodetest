@@ -6,7 +6,8 @@ export default class List extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      albums: []
+      albums: [],
+      users: []
     }
   }
 
@@ -18,18 +19,26 @@ export default class List extends Component {
     })
     .catch(console.log)
 
-    console.log(this.state);
+    fetch('https://jsonplaceholder.typicode.com/users')
+    .then(res => res.json())
+    .then((data) => {
+      this.setState({ users: data })
+    })
+    .catch(console.log)
   }
 
   render() {
     return (
       <ul>
-          {console.log("Inside render: ",this.state)}
           {this.state.albums.map(album => (
-              <ListItem key={album.id} title={album.title}></ListItem>
+              someFunc(album, this.state.users)
           ))}
       </ul>
     )
   }
 }
 
+function someFunc(album, users) {
+  var correctUser =  users.filter(user => user.id === album.userId);
+  return <ListItem key={album.id} title={album.title} userName={correctUser.name} email={correctUser.email}></ListItem>;
+}
